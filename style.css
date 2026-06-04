@@ -14,11 +14,20 @@
 }
 
 html {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -30,6 +39,7 @@ input,
 select,
 textarea {
   font: inherit;
+  max-width: 100%;
 }
 
 button {
@@ -44,11 +54,13 @@ input,
 select,
 textarea {
   width: 100%;
+  max-width: 100%;
   min-height: 46px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
   color: var(--text);
+  font-size: 16px;
   padding: 10px 12px;
 }
 
@@ -72,10 +84,17 @@ label {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  width: 100%;
+  max-width: 100%;
   padding: max(14px, env(safe-area-inset-top)) 16px 12px;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
+}
+
+.app-title {
+  flex: 1;
+  min-width: 0;
 }
 
 .eyebrow {
@@ -90,6 +109,7 @@ h1,
 h2 {
   margin: 0;
   letter-spacing: 0;
+  word-break: keep-all;
 }
 
 h1 {
@@ -100,31 +120,38 @@ h2 {
   font-size: 1.08rem;
 }
 
+.save-button {
+  flex-shrink: 0;
+  width: auto;
+  min-width: 72px;
+  max-width: 120px;
+  padding: 10px 14px;
+}
+
 .summary-bar {
   position: sticky;
   top: 72px;
   z-index: 15;
+  width: 100%;
+  max-width: 100%;
   background: #2a2f36;
   border-bottom: 1px solid #20242a;
   box-shadow: var(--shadow);
 }
 
 .summary-scroll {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  overflow-x: auto;
-  padding: 10px 14px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.summary-scroll::-webkit-scrollbar {
-  display: none;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 10px 12px;
 }
 
 .summary-item {
-  flex: 0 0 auto;
-  min-width: 92px;
+  min-width: 0;
+  width: 100%;
   padding: 9px 10px;
   border-radius: 8px;
   background: #fff;
@@ -140,16 +167,18 @@ h2 {
   display: block;
   margin-top: 3px;
   color: var(--text);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .app-shell {
   display: grid;
   gap: 14px;
-  width: min(100%, 920px);
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 14px 12px 28px;
+  padding: 12px;
 }
 
 .panel,
@@ -177,12 +206,36 @@ h2 {
 }
 
 .section-heading {
+  width: 100%;
+  max-width: 100%;
+  flex-wrap: wrap;
   margin-bottom: 12px;
 }
 
 .action-group {
+  flex: 1 1 220px;
+  min-width: 0;
+  max-width: 100%;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-end;
+}
+
+.action-group button {
+  width: 100%;
+}
+
+.saved-row {
+  width: 100%;
+}
+
+.saved-row select {
+  flex: 1;
+  min-width: 0;
+}
+
+.saved-row button {
+  flex-shrink: 0;
 }
 
 .primary-button {
@@ -211,6 +264,8 @@ h2 {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .wide-field {
@@ -246,12 +301,15 @@ h2 {
 }
 
 .hour-card-head {
+  width: 100%;
   align-items: end;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .hour-time-label {
   flex: 1;
+  min-width: 0;
 }
 
 .hour-time-input {
@@ -262,6 +320,7 @@ h2 {
 
 .signup-badge {
   display: none;
+  max-width: 100%;
   align-self: center;
   border-radius: 999px;
   background: var(--accent);
@@ -283,25 +342,30 @@ h2 {
 
 .counter-row {
   display: grid;
-  grid-template-columns: minmax(54px, 1fr) 48px minmax(64px, 78px) 48px;
+  grid-template-columns: minmax(54px, 1fr) 44px minmax(54px, 64px) 44px;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .counter-label {
+  min-width: 0;
   font-weight: 850;
 }
 
 .counter-button {
-  width: 48px;
-  min-height: 48px;
+  width: 44px;
+  min-width: 0;
+  min-height: 44px;
   border: 1px solid var(--line);
   background: #f7f8fa;
   font-size: 1.35rem;
 }
 
 .counter-input {
-  min-height: 48px;
+  min-width: 0;
+  min-height: 44px;
   padding: 8px;
   text-align: center;
   font-weight: 900;
@@ -344,10 +408,14 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .choice-buttons button {
-  flex: 1 0 78px;
+  flex: 1 1 72px;
+  min-width: 72px;
+  max-width: 100%;
   min-height: 46px;
   border: 1px solid var(--line);
   background: #f7f8fa;
@@ -407,6 +475,7 @@ h2 {
 
 .signup-table-wrapper {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -439,6 +508,10 @@ tr:last-child td {
 }
 
 @media (min-width: 700px) {
+  .summary-scroll {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .form-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -449,6 +522,35 @@ tr:last-child td {
 
   .summary-bar {
     top: 74px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+
+  .app-shell {
+    padding: 10px;
+  }
+
+  .app-header {
+    gap: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .save-button {
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+
+  .panel {
+    padding: 12px;
+  }
+
+  .summary-scroll {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -465,17 +567,37 @@ tr:last-child td {
   }
 
   .saved-row {
+    flex-direction: column;
     align-items: stretch;
+  }
+
+  .saved-row button {
+    width: 100%;
   }
 }
 
 @media (max-width: 380px) {
   .counter-row {
-    grid-template-columns: 50px 44px minmax(58px, 1fr) 44px;
+    grid-template-columns: 1fr 44px minmax(54px, 1fr) 44px;
     gap: 6px;
   }
 
   .counter-button {
     width: 44px;
+  }
+}
+
+@media (max-width: 360px) {
+  .summary-scroll {
+    grid-template-columns: 1fr;
+  }
+
+  .counter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .counter-button,
+  .counter-input {
+    width: 100%;
   }
 }
