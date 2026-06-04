@@ -9,15 +9,15 @@
   --shadow: 0 10px 24px rgba(16, 24, 40, 0.08);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   width: 100%;
   max-width: 100%;
-  margin: 0;
-  padding: 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -32,6 +32,13 @@ body {
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
 }
 
 button,
@@ -86,6 +93,8 @@ label {
   gap: 12px;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   padding: max(14px, env(safe-area-inset-top)) 16px 12px;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--line);
@@ -134,36 +143,44 @@ h2 {
   z-index: 15;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
   background: #2a2f36;
   border-bottom: 1px solid #20242a;
   box-shadow: var(--shadow);
 }
 
-.summary-scroll {
+.summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   overflow-x: hidden;
   padding: 10px 12px;
 }
 
-.summary-item {
+.summary-card {
   min-width: 0;
   width: 100%;
+  max-width: 100%;
   padding: 9px 10px;
   border-radius: 8px;
   background: #fff;
 }
 
-.summary-item strong {
+.summary-card * {
+  min-width: 0;
+}
+
+.summary-card strong {
   display: block;
   color: var(--muted);
   font-size: 0.72rem;
 }
 
-.summary-item span {
+.summary-card span {
   display: block;
   margin-top: 3px;
   color: var(--text);
@@ -177,13 +194,19 @@ h2 {
   gap: 14px;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   margin: 0 auto;
   padding: 12px;
+  overflow-x: hidden;
 }
 
 .panel,
 .hour-card,
 .signup-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -342,11 +365,12 @@ h2 {
 
 .counter-row {
   display: grid;
-  grid-template-columns: minmax(54px, 1fr) 44px minmax(54px, 64px) 44px;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
 }
 
 .counter-label {
@@ -354,10 +378,19 @@ h2 {
   font-weight: 850;
 }
 
-.counter-button {
-  width: 44px;
+.counter-control {
+  display: grid;
+  grid-template-columns: 40px 52px 40px;
+  gap: 6px;
+  align-items: center;
   min-width: 0;
-  min-height: 44px;
+}
+
+.counter-button {
+  width: 40px;
+  min-width: 0;
+  height: 40px;
+  min-height: 40px;
   border: 1px solid var(--line);
   background: #f7f8fa;
   font-size: 1.35rem;
@@ -365,7 +398,8 @@ h2 {
 
 .counter-input {
   min-width: 0;
-  min-height: 44px;
+  height: 40px;
+  min-height: 40px;
   padding: 8px;
   text-align: center;
   font-weight: 900;
@@ -508,12 +542,12 @@ tr:last-child td {
 }
 
 @media (min-width: 700px) {
-  .summary-scroll {
+  .summary-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .form-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hourly-list {
@@ -549,7 +583,7 @@ tr:last-child td {
     padding: 12px;
   }
 
-  .summary-scroll {
+  .summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -578,26 +612,104 @@ tr:last-child td {
 
 @media (max-width: 380px) {
   .counter-row {
-    grid-template-columns: 1fr 44px minmax(54px, 1fr) 44px;
-    gap: 6px;
+    grid-template-columns: 1fr;
   }
 
-  .counter-button {
-    width: 44px;
+  .counter-control {
+    width: 100%;
+    grid-template-columns: 1fr 1.2fr 1fr;
   }
 }
 
 @media (max-width: 360px) {
-  .summary-scroll {
-    grid-template-columns: 1fr;
-  }
-
-  .counter-row {
+  .summary-grid {
     grid-template-columns: 1fr;
   }
 
   .counter-button,
   .counter-input {
     width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .app,
+  .container,
+  main,
+  #app,
+  .app-shell {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
+  .app-header,
+  .header,
+  .top-header {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .summary-grid,
+  .stats-grid,
+  .summary-cards,
+  .total-cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .summary-card,
+  .stat-card,
+  .total-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .save-button,
+  #saveBtn,
+  button.save {
+    max-width: 110px;
+    padding: 10px 14px;
+  }
+
+  .section,
+  .card,
+  .panel,
+  .form-section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .counter-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .summary-grid,
+  .stats-grid,
+  .summary-cards,
+  .total-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .counter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .counter-control {
+    width: 100%;
+    grid-template-columns: 1fr 1.2fr 1fr;
   }
 }

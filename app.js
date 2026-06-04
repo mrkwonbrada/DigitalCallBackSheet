@@ -511,7 +511,7 @@ function updateSummary() {
   ];
 
   elements.summaryStats.innerHTML = items
-    .map(([label, value]) => `<div class="summary-item"><strong>${label}</strong><span>${value}</span></div>`)
+    .map(([label, value]) => `<div class="summary-card"><strong>${label}</strong><span>${value}</span></div>`)
     .join("");
 }
 
